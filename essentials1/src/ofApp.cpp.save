@@ -1,0 +1,122 @@
+#include "ofApp.h"
+
+//ofPolyline poly;
+ofPolyline polyline;
+
+//--------------------------------------------------------------
+void ofApp::setup(){
+
+
+        ofSetWindowTitle("Video synth");
+        ofSetWindowShape(1920,1080);
+        ofSetFrameRate(60);
+        ofBackground(ofColor::white);
+
+
+	poly.addVertex(100,100);
+	poly.bezierTo(0,0,-100,100,-100,-100);
+	poly.close();
+	//poly.bezierTo(100,-100);
+
+
+}
+
+//--------------------------------------------------------------
+void ofApp::update(){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+
+	ofPushMatrix();
+	ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2 );
+
+	/*
+	ofSetLineWidth(3.0);
+	ofSetColor(ofColor::black);
+	ofLine(0,-100,0,100);
+	*/
+
+	/*
+	ofSetCircleResolution(120);
+	ofSetColor(ofColor::yellow);
+	ofNoFill();
+	ofCircle(0,0,ofGetFrameNum()%(ofGetWidth()/2));
+	*/
+
+	/*
+	ofSetCo
+
+lor(ofColor::yellow);
+	poly.draw();
+	*/
+	
+	auto angle=0.;
+	while(angle < TWO_PI)
+	{
+		polyline.curveTo(100*cos(angle),0,100*sin(angle));
+		polyline.curveTo(300*cos(angle),300,300*sin(angle));
+		angle += TWO_PI / 30;
+	}
+
+	polyline.draw();
+
+	ofPopMatrix();
+
+}
+
+//--------------------------------------------------------------
+void ofApp::keyPressed(int key){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseMoved(int x, int y){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseDragged(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mousePressed(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseReleased(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseEntered(int x, int y){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseExited(int x, int y){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::windowResized(int w, int h){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::gotMessage(ofMessage msg){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::dragEvent(ofDragInfo dragInfo){ 
+
+}
