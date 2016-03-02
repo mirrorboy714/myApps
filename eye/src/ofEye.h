@@ -9,10 +9,20 @@ class ofEye {
 		void update();
 		void draw();
 
-		void setEyePosition(ofPoint pos);
-
-
+		void setPosBlackEye(ofPoint pos);
+		void setPosEye(ofPoint pos);
+		void setScale(float scale);
 	private:
-		ofPoint _pos;
+		ofPoint _posBlackEye;
+		ofPoint _posEye;
+		float _scale;
+		bool _isMirror;
+
+		void drawEye();
+		void drawWhiteEye();	
+		void drawBlackEye();
+		void drawMatsuge();
+		void drawSkin();
+		int getMirror();
 };
 

@@ -12,28 +12,70 @@ void ofEye::setup(){
 }
 
 void ofEye::update(){
-
+	
+	ofFill();
 }
 
 
 void ofEye::draw(){
 
 
-	for(int i = 0 ; i < 2 ; i++){
-	int isMirror = (i==0)?1:-1;
 	ofPushMatrix();
-		ofTranslate(ofGetWidth()/2,ofGetHeight()/2);
+	
+	ofTranslate(_posEye);
 
-		ofTranslate(ofGetWidth()/5.0 * isMirror,0);
+	_isMirror = true;
+	drawEye();
 
-		float scale = ofGetHeight()/2 * 4./5.;
-		ofScale(scale * isMirror,-scale );
-		ofFill();
+	_isMirror = false;
+	drawEye();
+
+	ofPopMatrix();
+}
+
+int ofEye::getMirror()
+{
+	return (_isMirror ? 1 : -1);
+}
+
+void ofEye::drawEye()
+{
+	ofPushMatrix();
+		//position
+		ofTranslate(_scale * getMirror(),0);
+
+		//scale	
+		//float scale = ofGetHeight()/2 * 4./5.;
+		ofScale(_scale * getMirror(),-_scale );
+		
+		//draw
 		ofEnableSmoothing();	
+			drawWhiteEye();
+			drawBlackEye();
+			drawSkin();			
+			drawMatsuge();
+		ofDisableSmoothing();
+	ofPopMatrix();
+}
+
+void ofEye::drawWhiteEye(){
+	
+	ofBeginShape();
+
+		ofSetColor(ofColor::white);
+		ofDrawRectangle(-1,-1,2.,2.);
+
+	ofEndShape();
+
+}
+
+void ofEye::drawBlackEye()
+{
+
+		//draw hitomi	
 			ofBeginShape();
 				ofPushMatrix();	
-				//	ofTranslate(isMirror * sin(ofGetFrameNum()/600.*TWO_PI)/8.,0);
-					ofTranslate(isMirror * _pos.x,_pos.y);
+					ofTranslate(getMirror() * _posBlackEye.x,_posBlackEye.y);
 					///Draw Black Eye
 					ofSetColor(8,0,0);
 					ofDrawEllipse(0,0,0.7,1.2);
@@ -50,8 +92,12 @@ void ofEye::draw(){
 					ofDrawCircle(0.1,-0.3,0.1);
 				ofPopMatrix();
 			ofEndShape();
+}
 
-			//Draw White Eye
+void ofEye::drawSkin()
+{
+	
+			//Draw White Eye but drawing skin....
 			ofBeginShape();
 				//ofSetColor(255,0,0);
 				//ofDrawRectangle(-1,-1,2,2);
@@ -77,8 +123,11 @@ void ofEye::draw(){
 					ofDrawCircle(whiteEyePoint,0.01);
 				}
 			ofDisableAlphaBlending();
-			
-			//Matsuge
+}
+
+void ofEye::drawMatsuge()
+{
+
 			ofBeginShape();
 				ofSetColor(ofColor::black);
 				ofVertex(matsugePoints[0]);
@@ -98,14 +147,20 @@ void ofEye::draw(){
 				ofCurveVertex(matsugePoints[0]);
 				ofCurveVertex(matsugePoints[0]);
 			ofEndShape();
-			
-
-		ofDisableSmoothing();
-	ofPopMatrix();
-	}
 }
 
-void ofEye::setEyePosition(ofPoint pos)
+void ofEye::setPosEye(ofPoint pos)
 {
-	_pos = pos;
+	_posEye = pos;
+}
+
+
+void ofEye::setPosBlackEye(ofPoint pos)
+{
+	_posBlackEye = pos;
+}
+
+void ofEye::setScale(float scale)
+{
+	_scale = scale;
 }

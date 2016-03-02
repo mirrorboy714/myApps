@@ -24,4 +24,5 @@ class ofApp : public ofBaseApp{
 
 	private:
 		ofEye eye;
+		ofEye eye2;
 };

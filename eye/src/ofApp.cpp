@@ -9,21 +9,30 @@ void ofApp::setup(){
 	ofSetCircleResolution(128);
 
 	eye.setup();
+	eye2.setup();
+
+	eye.setPosEye(ofPoint(490,0));
+	eye2.setPosEye(ofPoint(-200,200));
+	eye.setScale(100);
+	eye2.setScale(200);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	
-	eye.setEyePosition(ofPoint(0.35,0.35));	
+	eye.setPosBlackEye(ofPoint(0.35,0.35));	
 	eye.update();
+	eye2.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-	ofBackground(ofColor::white);
-
+	ofBackground(ofColor::gray);
+	ofTranslate(ofGetWidth()/2,ofGetHeight()/2);
+	
 	eye.draw();
+	eye2.draw();
 }
 
 //--------------------------------------------------------------
