@@ -1,0 +1,99 @@
+#include "ofApp.h"
+
+using namespace ofxCv;
+using namespace cv;
+
+//--------------------------------------------------------------
+void ofApp::setup(){
+
+	ofSetCircleResolution(128);
+
+	cam.setDesiredFrameRate(30);
+	cam.setDeviceID(0);
+	cam.initGrabber(640,480);
+
+	finder.setup("haarcascade_frontalface_default.xml");
+	finder.setPreset(ObjectFinder::Fast);
+}
+//--------------------------------------------------------------
+void ofApp::update(){
+
+	cam.update();
+	if(cam.isFrameNew()){
+		finder.update(cam);
+	}
+}
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+
+	ofPushMatrix();
+
+	static const ofPoint center = ofPoint(ofGetWidth()/2-cam.getWidth()/2,ofGetHeight()/2-cam.getHeight()/2);
+
+	ofScale(ofGetWidth()/cam.getWidth(),ofGetWidth()/cam.getWidth());
+	ofTranslate(0,ofGetHeight()/3.*4/2.);
+
+
+	cam.draw(0,0);
+	finder.draw();
+
+	ofDrawBitmapStringHighlight(ofToString(finder.size()),10,20);
+	ofDrawBitmapStringHighlight(ofToString(ofGetFrameRate()),10,40);
+	ofPopMatrix();
+}
+
+//--------------------------------------------------------------
+void ofApp::keyPressed(int key){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseMoved(int x, int y){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseDragged(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mousePressed(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseReleased(int x, int y, int button){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseEntered(int x, int y){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseExited(int x, int y){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::windowResized(int w, int h){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::gotMessage(ofMessage msg){
+
+}
+
+//--------------------------------------------------------------
+void ofApp::dragEvent(ofDragInfo dragInfo){ 
+
+}
